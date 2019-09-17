@@ -25,12 +25,19 @@ class App extends Component {
 			})
 		})
 	}
+
+	obtenerEventos =  async (busqueda) =>{
+		console.log(busqueda);
+	}
 	render(){
 		return (
 			<div className="app">
 				<Header title = "Eventos"/>
 				<div className = "uk-container">
-				<Formulario categorias = {this.state.categorias}/>
+				<Formulario 
+					categorias = {this.state.categorias}
+					obtenerEventos = {this.obtenerEventos}
+					/>
 				</div>
 			</div>
 		);

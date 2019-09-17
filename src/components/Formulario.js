@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 class Formulario extends Component {
 
 	//Creando los ref
-	eventoRef = React.createRef();
+	nombreEventoRef = React.createRef();
+	categoriaRef = React.createRef();
 
 	mostrarOpciones = key =>{
 		const categoria = this.props.categorias[key];
@@ -16,6 +17,18 @@ class Formulario extends Component {
 			<option key = {id} value = {id}>{name_localized}</option>
 		)
 	}
+
+	buscarEvento = e => {
+		e.preventDefault();
+
+		//Crear el objeto
+		const datosBusqueda = {
+			nombre : this.nombreEventoRef.current.value,
+			categoria : this.categoriaRef.current.value
+		}
+		//Pasarlo por props
+		this.props.obtenerEventos(datosBusqueda);
+	}
 	
 
 	state = {  }
@@ -23,22 +36,22 @@ class Formulario extends Component {
 	render() {
 		const categorias = Object.keys(this.props.categorias);
 		return (
-				<form>
+				<form onSubmit = {this.buscarEvento}>
 					<fieldset className = "uk-fieldset uk-margin">
 						<legend className="uk-legend uk-text-center">
 							Busca tu evento por nombre o categoria
 						</legend>
 						<div className ="uk-column-1-3@m uk-margin">
 							<div className ="uk-margin" uk-margin ="true">
-								<input className =" uk-input" type = "text" placeholder = "Nombre de evento o ciudad"></input>
+								<input ref={this.nombreEventoRef} className="uk-input" type="text" placeholder="Nombre de evento o ciudad"></input>
 							</div>
 							<div className ="uk-margin" uk-margin ="true">
-								<select className ="uk-select">
+								<select ref ={this.categoriaRef} className ="uk-select">
 									{categorias.map(this.mostrarOpciones)}
 								</select>
 							</div>
 							<div className ="uk-margin" uk-margin ="true">
-								<button className =" uk-button uk-button-danger">Buscar</button>
+								<button className =" uk-button uk-button-danger" type="submit" >Buscar</button>
 							</div>
 						</div>
 					</fieldset>
