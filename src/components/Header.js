@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 const Header = (props) => {
   return ( 
     <header className = "uk-margin" uk-margin = "true">
@@ -9,6 +10,9 @@ const Header = (props) => {
       </nav>
     </header>
    );
+}
+Header.propTypes ={
+  title : PropTypes.string.isRequired
 }
  
 export default Header;

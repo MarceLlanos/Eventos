@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Evento = (props) => {
 
@@ -6,7 +7,7 @@ const Evento = (props) => {
 	if(!name) return null;
 
 	let desc = props.info.description.text;
-	console.log(desc)
+
 	if(desc.length > 250){
 		desc = desc.substr(0, 250);
 	}
@@ -24,9 +25,14 @@ const Evento = (props) => {
 	 				<p>{desc}</p>
 	 			</div>
 
+				<div className="uk-card-footer">
+					<a className="uk-button uk-button-secondary" href={props.info.url} target="_blank">Mas informacion</a>
+				</div>
 	 		</div>
 		</div>
 	);
 }
- 
+ Evento.propTypes  = {
+	 info: PropTypes.object.isRequired
+ }
 export default Evento;
