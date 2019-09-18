@@ -8,7 +8,7 @@ class Formulario extends Component {
 
 	mostrarOpciones = key =>{
 		const categoria = this.props.categorias[key];
-		console.log(categoria);
+		
 		const {id, name_localized} = categoria;
 		if(!id || !name_localized){
 			return null;
@@ -35,6 +35,7 @@ class Formulario extends Component {
 
 	render() {
 		const categorias = Object.keys(this.props.categorias);
+
 		return (
 				<form onSubmit = {this.buscarEvento}>
 					<fieldset className = "uk-fieldset uk-margin">

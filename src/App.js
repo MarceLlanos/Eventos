@@ -1,14 +1,17 @@
 import React,{Component } from 'react';
 import Header from './components/Header';
 import Formulario from './components/Formulario';
+import Eventos from './components/Eventos';
 
 class App extends Component {
 
 	state = {
-		categorias : []
+		categorias : [],
+		eventos : []
 	}
 
 	token = '3N2TIJPZCYMIC2FHSQPJ';
+	ordenar = 'date';
 
 	componentDidMount() {
 		this.obtenerCategorias();
@@ -19,7 +22,7 @@ class App extends Component {
 		await fetch(url).then(response => {
 			return response.json();
 		}).then(categorias => {
-			console.log(categorias.categories);
+
 			this.setState({
 				categorias: categorias.categories
 			})
@@ -27,7 +30,13 @@ class App extends Component {
 	}
 
 	obtenerEventos =  async (busqueda) =>{
-		console.log(busqueda);
+		let url = `https://www.eventbriteapi.com/v3/events/search/?q=${busqueda.nombre}&sort_by=${this.ordenar}&categories=${busqueda.categoria}&token=3N2TIJPZCYMIC2FHSQPJ`;
+
+		await fetch(url).then(response => {
+			return response.json();
+		}).then(eventos => {
+			this.setState({eventos : eventos.events})
+		})
 	}
 	render(){
 		return (
@@ -38,6 +47,8 @@ class App extends Component {
 					categorias = {this.state.categorias}
 					obtenerEventos = {this.obtenerEventos}
 					/>
+
+					<Eventos eventos = {this.state.eventos}/>
 				</div>
 			</div>
 		);
